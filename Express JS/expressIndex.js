@@ -13,8 +13,11 @@ app.get('/home', (request, response) => {
         }
     );
 })
-
-app.post('/user', (request, response) => {
+const logger =  (request, response, next) => {
+    const data = request.body;
+    next();
+}
+app.post('/user', logger, (request, response, next) => {
     const data = request.data;
     console.log("Incoming data: " + data);
     response.json(
@@ -22,7 +25,9 @@ app.post('/user', (request, response) => {
             "message": "successfully received data",
             "data": data
         });
+    next()
 })
+
 app.listen(PORT, (request, response) => {
     response.send("Hi from express server")
 })
