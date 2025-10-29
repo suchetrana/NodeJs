@@ -15,7 +15,7 @@ app.get('/home', (request, response) => {
 })
 const logger =  (request, response, next) => {
     const data = request.body;
-    next();
+    next(); //calling next middleware
 }
 app.post('/user', logger, (request, response, next) => {
     const data = request.data;
